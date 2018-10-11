@@ -1,0 +1,52 @@
+﻿@model IEnumerable<ASPAssignment1.Models.show>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.movy.movie_title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.show_theatre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.show_time)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.show_rating)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.movy.movie_title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.show_theatre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.show_time)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.show_rating)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.show_id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.show_id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.show_id })
+        </td>
+    </tr>
+}
+
+</table>

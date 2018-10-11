@@ -1,0 +1,51 @@
+﻿@model ASPAssignment1.Models.show
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>show</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.movy.movie_title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.movy.movie_title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.show_theatre)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.show_theatre)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.show_time)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.show_time)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.show_rating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.show_rating)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.show_id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
