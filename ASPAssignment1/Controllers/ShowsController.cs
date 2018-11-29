@@ -55,30 +55,32 @@ namespace ASPAssignment1.Controllers
             return View("Details", show);
         }
 
-        //// GET: Shows/Create
-        //public ActionResult Create()
-        //{
-        //    ViewBag.movie_id = new SelectList(db.movies, "movie_id", "movie_title");
-        //    return View();
-        //}
+        // GET: Shows/Create
+        public ActionResult Create()
+        {
+            ViewBag.movie_id = new SelectList(db.movies, "movie_id", "movie_title");
+            ViewBag.Show_rating = new SelectList(db.shows.OrderBy(g => g.Show_rating), "Show_rating", "Name");
+            return View();
+        }
 
-        //// POST: Shows/Create
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create([Bind(Include = "show_id,show_theatre,show_time,show_rating,movie_id")] Show show)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.shows.Add(show);
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
+        // POST: Shows/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "show_id,show_theatre,show_time,show_rating,movie_id")] Show show)
+        {
+            if (ModelState.IsValid)
+            {
+                //db.shows.Add(show);
+                //db.SaveChanges();
+                return RedirectToAction("Index");
+            }
 
-        //    ViewBag.movie_id = new SelectList(db.movies, "movie_id", "movie_title", "show.movie_id");
-        //    return View(show);
-        //}
+            ViewBag.movie_id = new SelectList(db.movies, "movie_id", "movie_title", "show.movie_id");
+            ViewBag.Show_rating = new SelectList(db.shows.OrderBy(g => g.Show_rating), "Show_rating", "Name", show.Show_rating);
+            return View(show);
+        }
 
         // GET: Shows/Edit/5
         public ActionResult Edit(int? id)

@@ -249,5 +249,43 @@ namespace ASPAssignment1.Tests.Controllers
             Assert.AreEqual(shows[1], result);
         }
         #endregion
+
+        #region
+        //POST:Shows/Create
+        [TestMethod]
+        public void ShowSavedAndRedirected()
+        {
+            //act
+            var result = (RedirectToRouteResult)controller.Create(shows[0]);
+
+            //assert
+            Assert.AreEqual("Index", result.RouteValues["action"]);
+        }
+
+        [TestMethod]
+        public void ShowMovieNotNull()
+        {
+
+            //act
+            controller.ModelState.AddModelError("some error name", "fake error description");
+            var result = (ViewResult)this.controller.Create(this.shows[0]);
+
+            //assert
+            Assert.IsNotNull(result.ViewBag.Movie_id);
+        }
+
+        [TestMethod]
+        public void ShowRatingNotNull()
+        {
+
+            //act
+            controller.ModelState.AddModelError("some error name", "fake error description");
+            var result = (ViewResult)this.controller.Create(this.shows[0]);
+
+            //assert
+            Assert.IsNotNull(result.ViewBag.Show_rating);
+        }
+
+        #endregion
     }
 }
