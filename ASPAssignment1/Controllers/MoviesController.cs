@@ -27,7 +27,7 @@ namespace ASPAssignment1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            movy movy = db.movies.Find(id);
+            Movy movy = db.movies.Find(id);
             if (movy == null)
             {
                 return HttpNotFound();
@@ -46,7 +46,7 @@ namespace ASPAssignment1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "movie_id,movie_title,movie_genre,movie_duration")] movy movy)
+        public ActionResult Create([Bind(Include = "movie_id,movie_title,movie_genre,movie_duration")] Movy movy)
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +65,7 @@ namespace ASPAssignment1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            movy movy = db.movies.Find(id);
+            Movy movy = db.movies.Find(id);
             if (movy == null)
             {
                 return HttpNotFound();
@@ -78,7 +78,7 @@ namespace ASPAssignment1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "movie_id,movie_title,movie_genre,movie_duration")] movy movy)
+        public ActionResult Edit([Bind(Include = "movie_id,movie_title,movie_genre,movie_duration")] Movy movy)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace ASPAssignment1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            movy movy = db.movies.Find(id);
+            Movy movy = db.movies.Find(id);
             if (movy == null)
             {
                 return HttpNotFound();
@@ -109,7 +109,7 @@ namespace ASPAssignment1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            movy movy = db.movies.Find(id);
+            Movy movy = db.movies.Find(id);
             db.movies.Remove(movy);
             db.SaveChanges();
             return RedirectToAction("Index");

@@ -12,30 +12,30 @@ namespace ASPAssignment1.Models
         {
         }
 
-        public virtual DbSet<movy> movies { get; set; }
-        public virtual DbSet<show> shows { get; set; }
+        public virtual DbSet<Movy> movies { get; set; }
+        public virtual DbSet<Show> shows { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<movy>()
-                .Property(e => e.movie_title)
+            modelBuilder.Entity<Movy>()
+                .Property(e => e.Movie_title)
                 .IsFixedLength();
 
-            modelBuilder.Entity<movy>()
-                .Property(e => e.movie_genre)
+            modelBuilder.Entity<Movy>()
+                .Property(e => e.Movie_genre)
                 .IsFixedLength();
 
-            modelBuilder.Entity<movy>()
+            modelBuilder.Entity<Movy>()
                 .HasMany(e => e.shows)
                 .WithRequired(e => e.movy)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<show>()
-                .Property(e => e.show_theatre)
+            modelBuilder.Entity<Show>()
+                .Property(e => e.Show_theatre)
                 .IsFixedLength();
 
-            modelBuilder.Entity<show>()
-                .Property(e => e.show_rating)
+            modelBuilder.Entity<Show>()
+                .Property(e => e.Show_rating)
                 .IsFixedLength();
         }
     }

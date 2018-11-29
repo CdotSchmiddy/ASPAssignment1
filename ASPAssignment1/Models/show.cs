@@ -6,24 +6,24 @@ namespace ASPAssignment1.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class show
+    public partial class Show
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int show_id { get; set; }
+        public int Show_id { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string show_theatre { get; set; }
+        public string Show_theatre { get; set; }
 
-        public TimeSpan show_time { get; set; }
+        public string Show_time { get; set; }
 
         [Required]
         [StringLength(10)]
-        public string show_rating { get; set; }
+        public string Show_rating { get; set; }
 
-        public int movie_id { get; set; }
+        public int Movie_id { get; set; }
 
-        public virtual movy movy { get; set; }
+        public virtual Movy movy { get; set; }
     }
 }

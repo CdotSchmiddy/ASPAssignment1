@@ -6,29 +6,29 @@ namespace ASPAssignment1.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class movy
+    public partial class Movy
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public movy()
+        public Movy()
         {
-            shows = new HashSet<show>();
+            shows = new HashSet<Show>();
         }
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        public int movie_id { get; set; }
+        public int Movie_id { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string movie_title { get; set; }
+        public string Movie_title { get; set; }
 
         [Required]
         [StringLength(50)]
-        public string movie_genre { get; set; }
+        public string Movie_genre { get; set; }
 
-        public int movie_duration { get; set; }
+        public int Movie_duration { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<show> shows { get; set; }
+        public virtual ICollection<Show> shows { get; set; }
     }
 }
