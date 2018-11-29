@@ -55,12 +55,12 @@ namespace ASPAssignment1.Controllers
             return View("Details", show);
         }
 
-        // GET: Shows/Create
-        public ActionResult Create()
-        {
-            ViewBag.movie_id = new SelectList(db.movies, "movie_id", "movie_title");
-            return View();
-        }
+        //// GET: Shows/Create
+        //public ActionResult Create()
+        //{
+        //    ViewBag.movie_id = new SelectList(db.movies, "movie_id", "movie_title");
+        //    return View();
+        //}
 
         //// POST: Shows/Create
         //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
@@ -80,38 +80,42 @@ namespace ASPAssignment1.Controllers
         //    return View(show);
         //}
 
-        //// GET: Shows/Edit/5
-        //public ActionResult Edit(int? id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        //    }
-        //    show show = db.shows.Find(id);
-        //    if (show == null)
-        //    {
-        //        return HttpNotFound();
-        //    }
-        //    ViewBag.movie_id = new SelectList(db.movies, "movie_id", "movie_title", show.movie_id);
-        //    return View(show);
-        //}
+        // GET: Shows/Edit/5
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                //return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return View("Error");
+            }
+            Show show = db.shows.SingleOrDefault(a => a.Show_id == id);
+            if (show == null)
+            {
+                //return HttpNotFound();
+                return View("Error");
+            }
+            ViewBag.movie_id = new SelectList(db.movies, "movie_id", "movie_title", "show.movie_id");
+            ViewBag.Show_rating = new SelectList(db.shows.OrderBy(g => g.Show_rating), "Show_rating", "Name", show.Show_rating);
+            return View("Edit", show);
+        }
 
-        //// POST: Shows/Edit/5
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit([Bind(Include = "show_id,show_theatre,show_time,show_rating,movie_id")] show show)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        db.Entry(show).State = EntityState.Modified;
-        //        db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //    }
-        //    ViewBag.movie_id = new SelectList(db.movies, "movie_id", "movie_title", show.movie_id);
-        //    return View(show);
-        //}
+        // POST: Shows/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "show_id,show_theatre,show_time,show_rating,movie_id")] Show show)
+        {
+            if (ModelState.IsValid)
+            {
+                //db.Entry(show).State = EntityState.Modified;
+                //db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.movie_id = new SelectList(db.movies, "movie_id", "movie_title", "show.movie_id");
+            ViewBag.Show_rating = new SelectList(db.shows.OrderBy(g => g.Show_rating), "Show_rating", "Name", show.Show_rating);
+            return View("Edit", show);
+        }
 
         // GET: Shows/Delete/5
         public ActionResult Delete(int? id)

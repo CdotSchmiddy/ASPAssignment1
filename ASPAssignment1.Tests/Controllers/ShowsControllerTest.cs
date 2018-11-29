@@ -29,9 +29,9 @@ namespace ASPAssignment1.Tests.Controllers
 
             shows = new List<Show>
             {
-                new Show {Show_id = 100, Show_theatre = "Galaxy Cinemas", Show_time = "7:30", Show_rating = "5", movy = new Movy { Movie_id = 1000, Movie_title = "John Wick 2" } },
-                new Show {Show_id = 200, Show_theatre = "Galaxy North", Show_time = "8:30", Show_rating = "8", movy = new Movy { Movie_id = 2000, Movie_title = "The Avengers" }},
-                new Show {Show_id = 300, Show_theatre = "Scotiabank Theater", Show_time = "9:30", Show_rating = "10", movy = new Movy { Movie_id = 3000, Movie_title = "Sherlock Holmes" }}
+                new Show {Show_id = 100, Show_theatre = "Galaxy Cinemas", Show_time = "7:30", movy = new Movy { Movie_id = 1000, Movie_title = "John Wick 2" } },
+                new Show {Show_id = 200, Show_theatre = "Galaxy North", Show_time = "8:30", movy = new Movy { Movie_id = 2000, Movie_title = "The Avengers" }},
+                new Show {Show_id = 300, Show_theatre = "Scotiabank Theater", Show_time = "9:30", movy = new Movy { Movie_id = 3000, Movie_title = "Sherlock Holmes" }}
             };
 
             mock.Setup(m => m.shows).Returns(shows.AsQueryable());
@@ -184,5 +184,70 @@ namespace ASPAssignment1.Tests.Controllers
 
         #endregion
 
+
+        #region
+
+        [TestMethod]
+        public void EditValidIndexLoaded()
+        {
+            // act
+            RedirectToRouteResult result = (RedirectToRouteResult)controller.Edit(shows[0]);
+
+            // assert
+            Assert.AreEqual("Index", result.RouteValues["action"]);
+        }
+
+        [TestMethod]
+        public void EditWrongViewbagsRightMovie()
+        {
+            // arrange
+            controller.ModelState.AddModelError("some error name", "Error description");
+
+            // Act
+            ViewResult result = (ViewResult)controller.Edit(shows[0]);
+
+            // Assert
+            Assert.IsNotNull(result.ViewBag.Movie_id);
+        }
+
+        [TestMethod]
+        public void EditWrongViewbagsRightRating()
+        {
+            // arrange
+            controller.ModelState.AddModelError("some error name", "Error description");
+
+            // Act
+            ViewResult result = (ViewResult)controller.Edit(shows[0]);
+
+            // Assert
+            Assert.IsNotNull(result.ViewBag.Show_rating);
+        }
+
+        [TestMethod]
+        public void EditWrongLoadsView()
+        {
+            // arrange
+            controller.ModelState.AddModelError("some error name", "Error description");
+
+            // act 
+            ViewResult result = (ViewResult)controller.Edit(shows[0]);
+
+            // assert
+            Assert.AreEqual("Edit", result.ViewName);
+        }
+
+        [TestMethod]
+        public void EditWrongShowLoaded()
+        {
+            // arrange
+            controller.ModelState.AddModelError("some error name", "Error description");
+
+            // act 
+            Show result = (Show)((ViewResult)controller.Details(200)).Model;
+
+            // assert
+            Assert.AreEqual(shows[1], result);
+        }
+        #endregion
     }
 }
